@@ -131,6 +131,19 @@ $(document).ready(function(){
     console.log("filters from query:", filters)
 
     filter(params, filters)
+    filterTypeBtns.removeClass("filter__btn--big--active")
+    filterSubtypeBtns.removeClass("filter__btn--active")
+    const foundType = filterTypeBtns.filter(function() {
+        return $(this).attr("data-type") === filters.type || filters.type === "all"
+    })
+    $(foundType.get(0)).addClass("filter__btn--big--active")
+        // [0].addClass("filter__btn--big--active")
+    const foundSubtype = filterSubtypeBtns.filter(function() {
+        return $(this).attr("data-subtype") === filters.subtype || filters.type === "all"
+    })
+    $(foundSubtype.get(0)).addClass("filter__btn--active")
+        // [0].addClass("filter__btn--active")
+
     filterTypeBtns.on('click', function() {
         const type = $(this).attr("data-type")
         filterTypeBtns.removeClass("filter__btn--big--active")
