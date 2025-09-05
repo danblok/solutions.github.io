@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стилизованное меню выбора</title>
+    <style>
+      * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .select-header {
+            background: #4a6cf7;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .custom-select {
+            position: relative;
+            padding: 20px;
+        }
+        
+        .select-trigger {
+            background: white;
+            border: 2px solid #e1e5ee;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .select-trigger:hover {
+            border-color: #4a6cf7;
+        }
+        
+        .select-trigger::after {
+            content: "▼";
+            font-size: 0.8rem;
+            color: #777;
+            transition: transform 0.3s ease;
+        }
+        
+        .select-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .select-options.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(5px);
+        }
+        
+        .option {
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        
+        .option:last-child {
+            border-bottom: none;
+        }
+        
+        .option:hover {
+            background: #f5f8ff;
+            color: #4a6cf7;
+        }
+        
+        .option.selected {
+            background: #4a6cf7;
+            color: white;
+        }
+        
+        .select-trigger.active::after {
+            transform: rotate(180deg);
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="select-header">Выберите опцию</div>
+      <div class="custom-select">
+        <div class="select-trigger">Все</div>
+        <div class="select-options">
+          <div class="option selected">Все</div>
+          <div class="option">Возможности модуля</div>
+          <div class="option">Инструкция по установке</div>
+          <div class="option">Тех.параметры</div>
+          <div class="option">Тех.поддержка</div>
+          <div class="option">Частые вопросы</div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+            const selectTrigger = document.querySelector('.select-trigger');
+            const selectOptions = document.querySelector('.select-options');
+            const options = document.querySelectorAll('.option');
+            
+            selectTrigger.addEventListener('click', function() {
+                selectOptions.classList.toggle('active');
+                selectTrigger.classList.toggle('active');
+            });
+            
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const value = this.textContent;
+                    selectTrigger.textContent = value;
+                    
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    selectOptions.classList.remove('active');
+                    selectTrigger.classList.remove('active');
+                });
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!selectTrigger.contains(e.target) && !selectOptions.contains(e.target)) {
+                    selectOptions.classList.remove('active');
+                    selectTrigger.classList.remove('active');
+                }
+            });
+        });
+    </script>
+  </body>
+</html>

@@ -13,6 +13,7 @@
     "vite": "^7.1.2"
   },
   "dependencies": {
+    "choices.js": "^11.1.0",
     "jquery": "^3.7.1",
     "prettier": "^3.6.2"
   }

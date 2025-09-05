@@ -1,0 +1,112 @@
+
+ window.addEventListener('DOMContentLoaded', function() {
+     var elements = document.getElementsByClassName('btn-order-save');
+     for (var i = 0; i < elements.length; i++) {
+         elements[i].setAttribute('id', 'sendBtn');
+     }
+ });
+ window.onload{
+     $('.bx-soa-cart-total-button-container').attr('id', 'test');
+ }
+
+ $(document).ready(function() {
+
+
+
+     $('#bx-soa-delivery').each(function() {
+         var smalltitle = $(this).find('.bx-selected').find('.bx-soa-pp-company-smalltitle').text().trim();
+         var priceDostavka = $(this).find('.bx-selected').find('.bx-soa-pp-list-description').text().trim();
+
+         dostavka = document.querySelector('#dostavka').value = smalltitle;
+
+         dostavkaPrice = document.querySelector('#dostavkaPrice').value = priceDostavka.replace(/\s/g, '').replace(/[₽]/g, '');
+     });
+
+     $('#bx-soa-paysystem .bx-soa-pp-company-item.bx-selected').each(function() {
+         var dataId = $(this).attr('data-id');
+         if (dataId === '1'){
+             const oplata = document.querySelector('#oplata').value = 'Оплата наличными';
+         }
+         else if(dataId === '4'){
+             const oplata = document.querySelector('#oplata').value = 'Оплата картой';
+         }
+     });
+
+     $('#infoOrder .bx-soa-cart-total-line-total').each(function() {
+         var value = $(this).find('.bx-soa-cart-d').text().trim();
+         const itogo = document.querySelector('#itogo').value = value;
+     });
+ });
+
+ document.addEventListener('click', async function (e){
+
+     if (e.target.getAttribute('id') === 'sendBtn'){
+         let form = e.target.closest('form');
+         const name = form.querySelector('#soa-property-1').value;
+         const mail = form.querySelector('#soa-property-2').value;
+         const phone = form.querySelector('#soa-property-3').value;
+         const address = form.querySelector('#soa-property-7').value;
+         const comment = form.querySelector('#orderDescription').value;
+
+         let dataFilter = new FormData();
+
+         let dostavka;
+         let dostavkaPrice;
+
+         $('#bx-soa-delivery').each(function() {
+             var smalltitle = $(this).find('.bx-selected').find('.bx-soa-pp-company-smalltitle').text().trim();
+             var priceDostavka = $(this).find('.bx-selected').find('.bx-soa-pp-list-description').text().trim();
+
+             dostavka = document.querySelector('#dostavka').value = smalltitle;
+
+             dostavkaPrice = document.querySelector('#dostavkaPrice').value = priceDostavka.replace(/\s/g, '').replace(/[₽]/g, '');
+         });
+
+         let oplata;
+
+         $('#bx-soa-paysystem .bx-soa-pp-company-item.bx-selected').each(function() {
+             var dataId = $(this).attr('data-id');
+
+             if (dataId === '1'){
+                 oplata = document.querySelector('#oplata').value = '1';
+             }
+             else if(dataId === '4'){
+                 oplata = document.querySelector('#oplata').value = '4';
+             }
+         });
+
+         let itogo;
+
+         $('#infoOrder .bx-soa-cart-total-line-total').each(function() {
+             var value = $(this).find('.bx-soa-cart-d').text().trim();
+             itogo = document.querySelector('#itogo').value = value.replace(/\s/g, '').replace(/[₽]/g, '');
+
+         });
+
+
+
+         dataFilter.append('NAME', name);
+         dataFilter.append('EMAIL', mail);
+         dataFilter.append('PHONE', phone);
+         dataFilter.append('ADDRESS', address);
+         dataFilter.append('COMMENT', comment);
+
+         dataFilter.append('dostavka', dostavka);
+         dataFilter.append('dostavkaPrice', dostavkaPrice);
+         dataFilter.append('oplata', oplata);
+         dataFilter.append('itogo', itogo);
+
+
+
+         const request = await fetch(`/order/ajax.php?method=send`, {
+             method: 'POST',
+             body: dataFilter,
+         });
+
+         const result = await request.text();
+
+
+         console.log(result);
+     }
+
+ })

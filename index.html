@@ -6,15 +6,24 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
         <link href="src/style.css" rel="stylesheet">
-        <!-- For remote dev -->
+        <!-- REMOTE DEV START -->
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-        <script type="text/javascript" src="src/main.js"></script>
-        <!-- For local dev -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
+
+        />
+        <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+        <!-- REMOTE DEV END -->
+        <!-- LOCAL DEV START -->
         <!-- <link rel="stylesheet" type="text/css" href="slick/slick.css"/> -->
-        <!-- <script src="src/scripts/jquery.min.js"></script> -->
-        <!-- <script type="text/javascript" src="slick/slick.min.js"></script> -->
+        <!-- <script type="module" src="node_modules/choices.js/public/assets/styles/choices.min.css"></script> -->
+        <!-- <script type="module" src="node_modules/choices.js/public/assets/scripts/choices.min.js"></script> -->
+        <!-- <script type="module" src="src/scripts/jquery.min.js"></script> -->
+        <!-- <script type="module" src="slick/slick.min.js"></script> -->
+        <!-- Local Dev END -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Готовые решения</title>
     </head>
@@ -44,17 +53,43 @@
                             </p>
                         </div>
                         <section class="solutions__catalog">
+                            <select class="solutions__catalog__filter-select">
+                                <option value="all">Все</option>
+                                <option value="reviews">Отчёты</option>
+                                <option value="lead_catcher">Лид-магнит</option>
+                                <option value="integrations">Интеграции</option>
+                                <option value="auth">Авторизация</option>
+                                <option value="corp_website">Корпоративный</option>
+                            </select>
                             <div class="solutions__catalog__filter filter">
-                                <button class="filter__btn filter__btn--active" type="button" data-type="all">Все</button>
-                                <button class="filter__btn" type="button" data-type="reviews">Отчёты</button>
-                                <button class="filter__btn" type="button" data-type="lead_catcher">Лид-магнит</button>
-                                <button class="filter__btn" type="button" data-type="integrations">Интеграции</button>
-                                <button class="filter__btn" type="button" data-type="auth">Авторизация</button>
-                                <button class="filter__btn" type="button" data-type="corp_website">Корпоративный сайт</button>
+                                <div class="solutions__filter__type">
+                                    <button class="filter__btn filter__btn--big" type="button" data-type="all">Все</button>
+                                    <button class="filter__btn filter__btn--big" type="button" data-type="bx1c">
+                                        <img src="src/images/1c_bx_logo.svg" alt="1CBitrix logo">
+                                        <span class="filter__btn--big__title">1C-БИТРИКС</span>
+                                    </button>
+                                    <button class="filter__btn filter__btn--big" type="button" data-type="bx24">
+                                        <img src="src/images/bx24_logo.svg" class="filter__btn__img" alt="Bitrix24 logo">
+                                    </button>
+                                </div>
+                                <div class="solutions__filter__subtype">
+                                    <span class="filter__subtitle">Решения:</span>
+                                    <div class="solutions__filter__btns">
+                                        <button class="filter__btn filter__btn--active" type="button" data-type="all" data-subtype="all">Все</button>
+                                        <button class="filter__btn" type="button" data-type="bx1c" data-subtype="bx1c-reviews">Отзывы</button>
+                                        <button class="filter__btn" type="button" data-type="bx1c" data-subtype="bx1c-lead-catcher">Лид-магниты</button>
+                                        <button class="filter__btn" type="button" data-type="bx1c" data-subtype="bx1c-integrations">Интеграции</button>
+                                        <button class="filter__btn" type="button" data-type="bx1c" data-subtype="bx1c-auth">Авторизация</button>
+                                        <button class="filter__btn" type="button" data-type="bx24" data-subtype="bx24-robots">Роботы</button>
+                                        <button class="filter__btn" type="button" data-type="bx24" data-subtype="bx24-bizprocs">Бизнес-процессы</button>
+                                        <button class="filter__btn" type="button" data-type="bx24" data-subtype="bx24-integrations">Интеграции</button>
+                                        <button class="filter__btn" type="button" data-type="bx24" data-subtype="bx24-messengers">Мессенджеры</button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="solutions__catalog__list catalog__list">
-                                <div class="catalog__list__item" data-type="reviews">
-                                    <div class="catalog__list__item__block">
+                                <div class="catalog__list__item" data-type="bx1c" data-subtype="bx1c-reviews">
+                                    <div class="catalog__list__item__sidebar">
                                         <img
                                             src="src/images/yandex_maps.svg"
                                             alt="Yandex Maps logo"
@@ -66,49 +101,53 @@
                                             Скачиваний
                                         </p>
                                     </div>
-                                    <div class="catalog__list__item__block catalog__list__item__main">
-                                        <h3 class="catalog__list__item__title">
-                                            Отзывы с Яндекс.Карт на сайт
-                                        </h3>
-                                        <p class="catalog__list__item__desc">
-                                            Модуль позволяет интегрировать отзывы компании 
-                                            с Яндекс.Карт на ваш сайт, предоставляя вашим клиентам удобный и привлекательный интерфейс для просмотра отзывов о вашей компании
-                                        </p>
-                                        <a
-                                            href="/solutions/yandex-maps/more"
-                                            class="catalog__list__item__more"
-                                        >
-                                            Подробнее о возможностях и установке
-                                        </a>
-                                        <div class="catalog__list__item__price-wrapper">
+                                    <div class="catalog__list__item__main">
+                                        <div class="catalog__list__item__main-wrapper">
+                                            <div class="catalog__list__item__main__about">
+                                                <h3 class="catalog__list__item__title">
+                                                    Отзывы с Яндекс.Карт на сайт
+                                                </h3>
+                                                <p class="catalog__list__item__desc">
+                                                    Модуль позволяет интегрировать отзывы компании
+                                                    с Яндекс.Карт на ваш сайт, предоставляя вашим клиентам удобный и привлекательный интерфейс для просмотра отзывов о вашей компании
+                                                </p>
+                                                <a
+                                                    href="/solutions/yandex-maps/more"
+                                                    class="catalog__list__item__more"
+                                                >
+                                                    Подробнее о возможностях и установке
+                                                </a>
+                                            </div>
+                                            <div class="catalog__list__item__compatible">
+                                                <p class="catalog__list__item__compatible__label">Совместимо с</p>
+                                                <img
+                                                    src="src/images/1c_bitrix.svg"
+                                                    alt="1C Bitrix logo"
+                                                    class="catalog__list__item__compatible__img"
+                                                >
+                                                <p class="catalog__list__item__compatible__versions">
+                                                    <span class="catalog__list__item__compatible__versions__highlight">Подходящие редакции:</span>
+                                                    «Первый сайт», 
+                                                    «Старт», «Стандарт», 
+                                                    «Малый бизнес», «Бизнес», 
+                                                    «Интернет-магазин + CRM»
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="catalog__list__item__buy">
                                             <h3 class="catalog__list__item__price">4 990 руб</h3>
-                                            <a href="#" class="catalog__list__item__buy-btn">Купить</a>
+                                            <div class="catalog__list__item__buy-btns">
+                                                <a href="#" class="catalog__list__item__buy-btn">Купить</a>
+                                                <a href="#" class="catalog__list__item__demo-btn">Попробовать 7 дней</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="catalog__list__item__demo">
-                                        <div class="catalog__list__item__demo__compatible">
-                                            <p class="catalog__list__item__demo__compatible__label">Совместимо с</p>
-                                            <img
-                                                src="src/images/1c_bitrix.svg"
-                                                alt="1C Bitrix logo"
-                                                class="catalog__list__item__demo__compatible__img"
-                                            >
-                                            <p class="catalog__list__item__demo__compatible__versions">
-                                                <span class="catalog__list__item__demo__compatible__versions__highlight">Подходящие редакции:</span>
-                                                «Первый сайт», 
-                                                «Старт», «Стандарт», 
-                                                «Малый бизнес», «Бизнес», 
-                                                «Интернет-магазин + CRM»
-                                            </p>
-                                        </div>
-                                        <a href="#" class="catalog__list__item__demo-btn">Попробовать 7 дней</a>
                                     </div>
                                 </div>
-                                <div class="catalog__list__item" data-type="reviews">
-                                    <div class="catalog__list__item__block">
+                                <div class="catalog__list__item" data-type="bx1c" data-subtype="bx1c-reviews">
+                                    <div class="catalog__list__item__sidebar">
                                         <img
                                             src="src/images/2gis_maps.svg"
-                                            alt="Yandex Maps logo"
+                                            alt="2Gis logo"
                                             class="catalog__list__item__logo"
                                         >
                                         <p class="catalog__list__item__downloads">
@@ -117,53 +156,57 @@
                                             Скачиваний
                                         </p>
                                     </div>
-                                    <div class="catalog__list__item__block catalog__list__item__main">
-                                        <h3 class="catalog__list__item__title">
-                                            Отзывы с 2ГИС на сайт
-                                        </h3>
-                                        <p class="catalog__list__item__desc">
-                                            Модуль позволяет интегрировать отзывы компании
-                                            с 2ГИС на ваш сайт, предоставляя вашим клиентам удобный
-                                            и привлекательный интерфейс для просмотра отзывов о вашей компании
-                                        </p>
-                                        <a
-                                            href="/solutions/yandex-maps/more"
-                                            class="catalog__list__item__more"
-                                        >
-                                            Подробнее о возможностях и установке
-                                        </a>
-                                        <div class="catalog__list__item__price-wrapper">
+                                    <div class="catalog__list__item__main">
+                                        <div class="catalog__list__item__main-wrapper">
+                                            <div class="catalog__list__item__main__about">
+                                                <h3 class="catalog__list__item__title">
+                                                    Отзывы с 2ГИС на сайт
+                                                </h3>
+                                                <p class="catalog__list__item__desc">
+                                                    Модуль позволяет интегрировать отзывы компании
+                                                    с 2ГИС на ваш сайт, предоставляя вашим клиентам удобный
+                                                    и привлекательный интерфейс для просмотра отзывов о вашей компании
+                                                </p>
+                                                <a
+                                                    href="/solutions/yandex-maps/more"
+                                                    class="catalog__list__item__more"
+                                                >
+                                                    Подробнее о возможностях и установке
+                                                </a>
+                                            </div>
+                                            <div class="catalog__list__item__compatible">
+                                                <p class="catalog__list__item__compatible__label">Совместимо с</p>
+                                                <img
+                                                    src="src/images/1c_bitrix.svg"
+                                                    alt="1C Bitrix logo"
+                                                    class="catalog__list__item__compatible__img"
+                                                >
+                                                <p class="catalog__list__item__compatible__versions">
+                                                    <span class="catalog__list__item__compatible__versions__highlight">Подходящие редакции:</span>
+                                                    «Первый сайт», 
+                                                    «Старт», «Стандарт», 
+                                                    «Малый бизнес», «Бизнес», 
+                                                    «Интернет-магазин + CRM»
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="catalog__list__item__buy">
                                             <h3 class="catalog__list__item__price">4 990 руб</h3>
-                                            <a href="#" class="catalog__list__item__buy-btn">Купить</a>
+                                            <div class="catalog__list__item__buy-btns">
+                                                <a href="#" class="catalog__list__item__buy-btn">Купить</a>
+                                                <a href="#" class="catalog__list__item__demo-btn">Попробовать 7 дней</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="catalog__list__item__demo">
-                                        <div class="catalog__list__item__demo__compatible">
-                                            <p class="catalog__list__item__demo__compatible__label">Совместимо с</p>
-                                            <img
-                                                src="src/images/1c_bitrix.svg"
-                                                alt="1C Bitrix logo"
-                                                class="catalog__list__item__demo__compatible__img"
-                                            >
-                                            <p class="catalog__list__item__demo__compatible__versions">
-                                                <span class="catalog__list__item__demo__compatible__versions__highlight">Подходящие редакции:</span>
-                                                «Первый сайт», 
-                                                «Старт», «Стандарт», 
-                                                «Малый бизнес», «Бизнес», 
-                                                «Интернет-магазин + CRM»
-                                            </p>
-                                        </div>
-                                        <a href="#" class="catalog__list__item__demo-btn">Попробовать 7 дней</a>
                                     </div>
                                 </div>
-                                <div class="catalog__list__item" data-type="lead_catcher">
-                                    <div class="catalog__list__item__block">
+                                <div class="catalog__list__item" data-type="bx1c" data-subtype="bx1c-lead-catcher">
+                                    <div class="catalog__list__item__sidebar">
                                         <p class="catalog__list__item__new">
                                             Новый
                                         </p>
                                         <img
                                             src="src/images/lead_catcher.svg"
-                                            alt="Yandex Maps logo"
+                                            alt="Lead Catcher logo"
                                             class="catalog__list__item__logo"
                                         >
                                         <p class="catalog__list__item__downloads">
@@ -172,50 +215,56 @@
                                             Скачиваний
                                         </p>
                                     </div>
-                                    <div class="catalog__list__item__block catalog__list__item__main">
-                                        <h3 class="catalog__list__item__title">
-                                            Ловец Лидов
-                                        </h3>
-                                        <p class="catalog__list__item__desc">
-                                            Модуль, который позволяет значительно увеличить
-                                            конверсию вашего сайта.
-                                            Подключайте ловец лидов при ведении рекламы на сайт
-                                            и повышайте эффективность рекламных кампаний
-                                        </p>
-                                        <a
-                                            href="/solutions/yandex-maps/more"
-                                            class="catalog__list__item__more"
-                                        >
-                                            Подробнее о возможностях и установке
-                                        </a>
-                                        <div class="catalog__list__item__price-wrapper">
+                                    <div class="catalog__list__item__main">
+                                        <div class="catalog__list__item__main-wrapper">
+                                            <div class="catalog__list__item__main__about">
+                                                <h3 class="catalog__list__item__title">
+                                                    Ловец Лидов
+                                                </h3>
+                                                <p class="catalog__list__item__desc">
+                                                    Модуль, который позволяет значительно увеличить
+                                                    конверсию вашего сайта.
+                                                    Подключайте ловец лидов при ведении рекламы на сайт
+                                                    и повышайте эффективность рекламных кампаний
+                                                </p>
+                                                <a
+                                                    href="/solutions/lead-catcher/more"
+                                                    class="catalog__list__item__more"
+                                                >
+                                                    Подробнее о возможностях и установке
+                                                </a>
+                                            </div>
+                                            <div class="catalog__list__item__compatible">
+                                                <p class="catalog__list__item__compatible__label">Совместимо с</p>
+                                                <img
+                                                    src="src/images/1c_bitrix.svg"
+                                                    alt="1C Bitrix logo"
+                                                    class="catalog__list__item__compatible__img"
+                                                >
+                                                <p class="catalog__list__item__compatible__versions">
+                                                    <span class="catalog__list__item__compatible__versions__highlight">Подходящие редакции:</span>
+                                                    «Первый сайт», 
+                                                    «Старт», «Стандарт», 
+                                                    «Малый бизнес», «Бизнес», 
+                                                    «Интернет-магазин + CRM»
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="catalog__list__item__buy">
                                             <h3 class="catalog__list__item__price">2 990 руб</h3>
-                                            <a href="#" class="catalog__list__item__buy-btn">Купить</a>
+                                            <div class="catalog__list__item__buy-btns">
+                                                <a href="#" class="catalog__list__item__buy-btn">Купить</a>
+                                                <a href="#" class="catalog__list__item__demo-btn">Попробовать 7 дней</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="catalog__list__item__demo">
-                                        <div class="catalog__list__item__demo__compatible">
-                                            <p class="catalog__list__item__demo__compatible__label">Совместимо с</p>
-                                            <img
-                                                src="src/images/1c_bitrix.svg"
-                                                alt="1C Bitrix logo"
-                                                class="catalog__list__item__demo__compatible__img"
-                                            >
-                                            <p class="catalog__list__item__demo__compatible__versions">
-                                                <span class="catalog__list__item__demo__compatible__versions__highlight">Подходящие редакции:</span>
-                                                «Первый сайт», 
-                                                «Старт», «Стандарт», 
-                                                «Малый бизнес», «Бизнес», 
-                                                «Интернет-магазин + CRM»
-                                            </p>
-                                        </div>
-                                        <a href="#" class="catalog__list__item__demo-btn">Попробовать 7 дней</a>
                                     </div>
                                 </div>
                             </div>
                         </section>
-                        <a href="#" class="solutions__see-more">Показать ещё
-                            <img src="src/images/arrow_right.svg" alt="Arrow right"></a>
+                        <div class="solutions__page">
+                            <button type="button" class="solutions__page__btn solutions__page__btn-switch solutions__page__btn-switch-left"><img src="src/images/arrow.svg"  alt="Left arrow"></button>
+                            <button type="button" class="solutions__page__btn solutions__page__btn-switch solutions__page__btn-switch-right"><img src="src/images/arrow.svg" class="solutions__page__arrow-right" alt="Right arrow"></button>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -227,6 +276,44 @@
                             <br>
                             от Lead Space это:
                         </h2>
+                                                <div class="advantages__list">
+                            <div class="advantages__list__item">
+                                <img src="src/images/clock.svg" alt="Clock" class="advantages__list__item__img">
+                                <p class="advantages__list__item__title">
+                                    Экономия вашего времени
+                                </p>
+                                <p class="advantages__list__item__desc">
+                                    Модули значительно ускоряют выполнение рутинных операций, что позволяет сосредоточиться на действительно важных задачах.
+                                </p>
+                            </div>
+                            <div class="advantages__list__item">
+                                <img src="src/images/reload.svg" alt="Reload" class="advantages__list__item__img">
+                                <p class="advantages__list__item__title">
+                                    Постоянные обновления
+                                </p>
+                                <p class="advantages__list__item__desc">
+                                    Мы постоянно работаем над улучшением качества и развитием наших модулей: исправляем ошибки, оптимизируем код, делаем их еще удобнее.
+                                </p>
+                            </div>
+                            <div class="advantages__list__item">
+                                <img src="src/images/check.svg" alt="Check" class="advantages__list__item__img">
+                                <p class="advantages__list__item__title">
+                                    Проверка на реальных проектах
+                                </p>
+                                <p class="advantages__list__item__desc">
+                                    Все перечисленные модули активно применяются в процессе разработки сайтов для наших клиентов.
+                                </p>
+                            </div>
+                            <div class="advantages__list__item">
+                                <img src="src/images/settings.svg" alt="Settings" class="advantages__list__item__img">
+                                <p class="advantages__list__item__title">
+                                    Легкая настройка
+                                </p>
+                                <p class="advantages__list__item__desc">
+                                    Вы с легкостью можете настроить любые параметры в административной панели сайта., воспользовавшись инструкцией к модулю.
+                                </p>
+                            </div>
+                        </div>
                         <div class="advantages__list">
                             <div class="advantages__list__item">
                                 <img src="src/images/clock.svg" alt="Clock" class="advantages__list__item__img">
@@ -340,7 +427,7 @@
                                 <div class="instruction__slider">
                                     <div class="instruction__card" >
                                         <div class="instruction__card-wrapper">
-                                        <img src="src/images/instructions.svg" alt="Instructions" class="instruction__card__img">
+                                            <img src="src/images/instructions.svg" alt="Instructions" class="instruction__card__img">
                                             <div class="instruction__card__info">
                                                 <h4 class="instruction__card__label">
                                                     Инструкция
@@ -388,54 +475,44 @@
                             </div>
                         </div>
                     </div>
-                        <div class="support__share">
-                            <img
-                                src="src/images/share_bg.svg"
-                                alt="Share background"
-                                class="support__share__info__img"
-                            >
-                            <div class="support__share__info">
-                                <img
-                                    src="src/images/puzzle_part_bg.svg"
-                                    alt="Puzzle part"
-                                    class="support__share__info__puzzle-part"
-                                >
-                                <h4 class="support__share__info__title">
-                                    Не нашли
+                    <div class="support__share">
+                        <div class="support__share__info">
+                            <h4 class="support__share__info__title">
+                                Не нашли
+                                <br>
+                                нужного модуля
+                                <br>
+                                для своего сайта?
+                            </h4>
+                            <p class="support__share__info__desc">
+                                Предложи идею по решению
+                                <br>
+                                для 1С-Битрикс и получи
+                                <br>
+                                от нас бонус
+                            </p>
+                        </div>
+                        <div class="support__share__discount">
+                            <h4 class="support__share__discount__title">
+                                <span class="support__share__discount__title__highlight">Скидка 5%</span>
+                                <br>
+                                на одно наше решение<br>
+                                из каталога!
+                            </h4>
+                            <div class="support__share__discount__info">
+                                <button type="button" class="share-btn">
+                                    Предложить идею
+                                    <img src="src/images/bulb.svg" alt="Bulb icon" class="share-btn__img">
+                                </button>
+                                <p class="support__share__discount__info__desc">
+                                    А мы реализуем ваш
                                     <br>
-                                    нужного модуля
-                                    <br>
-                                    для своего сайта?
-                                </h4>
-                                <p class="support__share__info__desc">
-                                    Предложи идею по решению
-                                    <br>
-                                    для 1С-Битрикс и получи
-                                    <br>
-                                    от нас бонус
+                                    запрос на новый модуль!
                                 </p>
-                            </div>
-                            <div class="support__share__discount">
-                                <h4 class="support__share__discount__title">
-                                    <span class="support__share__discount__title__highlight">Скидка 5%</span>
-                                    <br>
-                                    на одно наше решение<br>
-                                    из каталога!
-                                </h4>
-                                <div class="support__share__discount__info">
-                                    <button type="button" class="share-btn">
-                                        Предложить идею
-                                        <img src="src/images/bulb.svg" alt="Bulb icon" class="share-btn__img">
-                                    </button>
-                                    <p class="support__share__discount__info__desc">
-                                        А мы реализуем ваш
-                                        <br>
-                                        запрос на новый модуль!
-                                    </p>
-                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </section>
             <section class="faq">
                 <div class="container">
@@ -561,5 +638,7 @@
                 </div>
             </section>
         </main>
+
+        <script type="text/javascript" src="src/main.js"></script>
     </body>
 </html>
