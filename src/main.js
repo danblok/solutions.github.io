@@ -1,3 +1,130 @@
+function setupModal() {
+    const form = $('#share-idea-form');
+    if (!form) return;
+
+    // Элементы формы
+    const nameInput = form.find('.share-idea-form__input-text[name="NAME"]');
+    const phoneInput = form.find('.share-idea-form__input-text[name="PHONE"]');
+    const emailInput = form.find('.share-idea-form__input-text[name="EMAIL"]');
+    const agreementCheckbox = form.find('.share-idea-form__input-checkbox[name="AGREEMENT"]');
+    const submitButton = form.find('.share-idea-form__btn[type="submit"]');
+    const closeButton = $(".share-idea-modal__close-btn")
+    closeButton.on("click", function() {
+        $(".share-idea-modal").removeClass("share-idea-modal--active")
+    })
+
+    // Сохраняем оригинальные тексты label
+    const originalLabels = {
+        name: form.find('.share-idea-form__label[for="name"]').text(),
+        phone: form.find('.share-idea-form__label[for="phone"]').text(),
+        email: form.find('.share-idea-form__label[for="email"]').text()
+    };
+
+    // Флаги для отслеживания "прикосновения" к полям
+    const touchedFields = {
+        name: false,
+        phone: false,
+        email: false
+    };
+
+    // Валидация полей
+    const validateField = (field, type) => {
+        const value = field.val().trim();
+        const label = form.find(`.share-idea-form__label[for="${field.attr("id")}"]`);
+        const parent = field.parent()
+
+        // Проверка на пустое поле (только для обязательных)
+        if ((type === 'name' || type === 'phone') && !value) {
+            parent.addClass('share-idea-form__input--error');
+            label.text(type === 'name' ? 'Введите имя' : 'Введите телефон')
+            return false;
+        }
+
+        // Проверка минимальной длины имени
+        if (type === 'name' && value.length > 0 && value.length < 2) {
+            parent.addClass('error');
+            label.textContent = 'Минимум 2 символа';
+            return false;
+        }
+
+        // Проверка формата
+        let isValid = true;
+        if (type === 'name' && value && !/^[а-яА-ЯёЁa-zA-Z\s]+$/.test(value)) {
+            isValid = false;
+            label.text('Только буквы');
+        } else if (type === 'phone' && value && !/^(\+7|8)[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$/.test(value)) {
+            isValid = false;
+            label.text('Формат: +7 999 999 99 99')
+        } else if (type === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+            isValid = false;
+            label.text('Неверный формат')
+        }
+
+        if (!isValid) {
+            parent.addClass('share-idea-form__input--error');
+            return false;
+        }
+
+        // Если все ок
+        parent.removeClass('share-idea-form__input--error');
+        label.text(originalLabels[type])
+        return true;
+    };
+
+    // Проверка возможности отправки формы
+    const checkFormValidity = () => {
+        const isNameValid = touchedFields.name ? validateField(nameInput, 'name') : true;
+        const isPhoneValid = touchedFields.phone ? validateField(phoneInput, 'phone') : true;
+        const isEmailValid = emailInput.value && touchedFields.email ? validateField(emailInput, 'email') : true;
+        const isAgreementChecked = agreementCheckbox.val() === "Y"
+
+        submitButton.prop(
+            "disabled",
+            !(
+                nameInput.val().trim().length >= 2 &&
+                    phoneInput.val().trim() &&
+                    isNameValid &&
+                    isPhoneValid &&
+                    isEmailValid &&
+                    isAgreementChecked
+            )
+        );
+    };
+
+    // Обработчики событий
+    [nameInput, phoneInput, emailInput].forEach(input => {
+        const type = input.attr("name").toLowerCase();
+
+        input.on('focus', function() {
+            touchedFields[type] = true;
+        });
+
+        input.on('blur', function() {
+            touchedFields[type] = true;
+            validateField($(this), type);
+            checkFormValidity();
+        });
+
+        input.on('input', function() {
+            const parent = $(this).parent()
+            if (parent.hasClass('share-idea-form__input--error')) {
+                validateField($(this), type);
+            }
+            checkFormValidity();
+        });
+    });
+
+    agreementCheckbox.on('change', checkFormValidity);
+
+    // Инициализация - кнопка disabled по умолчанию
+    submitButton.prop("disabled", true);
+    submitButton.on("click", function(event) {
+        event.preventDefault()
+        $(".share-idea-modal__content").removeClass("share-idea-modal_step--active")
+        $(".share-idea-modal__success").addClass("share-idea-modal_step--active")
+    })
+}
+
 function renderPagination(container, totalPages, curPage) {
     const rightBtn = container.find(".solutions__page__btn-switch-right")
 
@@ -72,6 +199,11 @@ function filter(params, filters) {
         filter(params, filters)
     })
 
+    $('.filter__btn--big').removeClass("filter__btn--big--active")
+    $('.filter__btn').removeClass("filter__btn--active")
+    $(`.filter__btn--big[data-type="${filters.type}"]`).addClass("filter__btn--big--active")
+    $(`.filter__btn[data-subtype="${filters.subtype}"]`).addClass("filter__btn--active")
+
     setQueryParam("type", filters.type)
     setQueryParam("subtype", filters.subtype)
     setQueryParam("page", filters.page.cur)
@@ -112,9 +244,44 @@ $(document).ready(function(){
             // highlightedState: [],
             // list: ["filter-choices__list"],
         },
+        shouldSort: false,
     })
 
+    const shareModalInputs = $('.share-idea-modal__input--text');
+    const shareBtn = $(".share-btn").on('click', function() {
+        $(".share-idea-modal").addClass("share-idea-modal--active")
+    })
+    shareModalInputs.each(function() {
+        const input = $(this)
+        // Check if input has value on page load (for browser autofill)
+        if(input.val()) {
+            input.addClass('share-idea-modal__input--has-value');
+        }
 
+        input.on('focus', function() {
+            $(this).parent().addClass('share-idea-modal__input--focused');
+        });
+
+        input.on('blur', function() {
+            if(!$(this).val()) {
+                $(this).removeClass('share-idea-modal__input--focused');
+            }
+            $(this).parent().toggleClass('share-idea-modal__input--has-value', $(this).val() !== '');
+        });
+    });
+
+    setupModal()
+
+    $(".solutions__catalog__filter-select").on("change", function() {
+        const type = $(this).val()
+        filters.type = type
+        filters.subtype = "all"
+        filters.page.cur = 1
+        // filterTypeBtns.removeClass("filter__btn--big--active")
+        // $('.filter__btn--big[data-type="all"]').addClass("filter__btn--big--active")
+
+        filter(params, filters)
+    })
 
     // Should be in this order
     const items = $(".catalog__list__item")
@@ -146,8 +313,6 @@ $(document).ready(function(){
 
     filterTypeBtns.on('click', function() {
         const type = $(this).attr("data-type")
-        filterTypeBtns.removeClass("filter__btn--big--active")
-        $(this).addClass("filter__btn--big--active")
         filters.type = type
         filters.subtype = "all"
         filters.page.cur = 1
@@ -156,8 +321,6 @@ $(document).ready(function(){
     })
 
     filterSubtypeBtns.on("click", function () {
-        filterSubtypeBtns.removeClass("filter__btn--active")
-        $(this).addClass("filter__btn--active")
 
         const subtype = $(this).attr("data-subtype")
         filters.subtype = subtype
@@ -236,6 +399,7 @@ $(document).ready(function(){
         // console.log("slide idx:", slideIdx)
         sliderTabs.removeClass("instruction__tab__btn--active")
         $(`.instruction__tab__btn[data-tab-index="${slideIdx}"]`).addClass("instruction__tab__btn--active");
+        filter()
         // do something with currentSlide index (0-based)
     });
 });
