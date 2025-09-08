@@ -1440,7 +1440,7 @@ span {
 		background: linear-gradient(277.3deg, #eefefc 8.02%, #e7eefb 47.4%);
 		box-shadow: 0px 6px 30px 0px rgba(12, 49, 111, 0.1) inset;
 		position: relative;
-		padding-bottom: 5px;
+		padding-bottom: 40px;
 	}
 
 	.solutions::before {
@@ -1956,6 +1956,21 @@ span {
 
 	.share-idea-modal-wrapper {
 		margin: 0 10px;
+	}
+}
+
+@media screen and (max-height: 840px) {
+	.share-idea-modal__form {
+		gap: 10px;
+		margin-top: 20px;
+	}
+
+	.share-idea-form__file-wrapper {
+		padding: 19px 0;
+	}
+
+	.share-idea-form__checkbox-wrapper {
+		margin-top: 10px;
 	}
 }
 
