@@ -399,7 +399,6 @@ $(document).ready(function(){
         // console.log("slide idx:", slideIdx)
         sliderTabs.removeClass("instruction__tab__btn--active")
         $(`.instruction__tab__btn[data-tab-index="${slideIdx}"]`).addClass("instruction__tab__btn--active");
-        filter()
         // do something with currentSlide index (0-based)
     });
 });
