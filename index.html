@@ -29,6 +29,19 @@
       href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script
+      src="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/webawesome.js"
+      type="module"
+    ></script>
+    <script
+      src="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/webawesome.loader.js"
+      type="module"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/styles/utilities.css"
+    />
+
     <!-- BOOTSTRAP START -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
@@ -164,16 +177,20 @@
       </div>
       <section class="solutions">
         <div class="page-container">
-          <div class="breadcrumb">
-            <a href="/">Главная</a>
-            /
-            <span>Готовые решения для сайта</span>
-          </div>
+          <wa-breadcrumb class="breadcrumb">
+            <span slot="separator" class="breadcrumb__separator">/</span>
+            <wa-breadcrumb-item class="breadcrumb__item">
+              Главная
+            </wa-breadcrumb-item>
+            <wa-breadcrumb-item class="breadcrumb__item">
+              Готовые решения для сайта
+            </wa-breadcrumb-item>
+          </wa-breadcrumb>
           <div class="solutions-wrapper">
             <div class="solutions__wrapper-head">
               <h1 class="solutions__title">
-                Каталог
-                <span class="solutions__title--highlight">готовых решений</span>
+                Каталог готовых решений для
+                <span class="solutions__title--highlight">веб-сайтов</span>
               </h1>
               <p class="solutions__subtitle">
                 Разрабатываем готовые модули, которые легко и быстро
@@ -759,45 +776,38 @@
             </div>
           </div>
           <div class="support__share">
-            <div class="support__share__info">
-              <h4 class="support__share__info__title">
-                Не нашли
-                <br />
-                нужного модуля
-                <br />
-                для своего сайта?
-              </h4>
-              <p class="support__share__info__desc">
-                Предложи идею по решению
-                <br />
-                для 1С-Битрикс и получи
-                <br />
-                от нас бонус
-              </p>
-            </div>
-            <div class="support__share__discount">
-              <h4 class="support__share__discount__title">
-                <span class="support__share__discount__title__highlight"
-                  >Скидка 5%</span
-                >
-                <br />
-                на одно наше решение<br />
-                из каталога!
-              </h4>
-              <div class="support__share__discount__info">
-                <button type="button" class="share-btn">
-                  Предложить идею
-                  <img
-                    src="src/images/bulb.svg"
-                    alt="Bulb icon"
-                    class="share-btn__img"
-                  />
-                </button>
-                <p class="support__share__discount__info__desc">
-                  А мы реализуем ваш
-                  <br />
-                  запрос на новый модуль!
+            <div class="share">
+              <div class="share__info">
+                <h4 class="share__info__title">
+                  Не нашли нужного модуля для своего сайта?
+                </h4>
+                <p class="share__info__desc">
+                  Предложи идею по решению для 1С-Битрикс и получи от нас бонус
                 </p>
+              </div>
+              <div class="share__discount">
+                <h4 class="share__discount__title">
+                  <span class="share__discount__title--highlight">
+                    Скидка 5%
+                  </span>
+                  на одно наше решение <br />
+                  из каталога!
+                </h4>
+                <div class="share__discount__info">
+                  <button type="button" class="btn--blue">
+                    Предложить идею
+                    <img
+                      src="src/images/bulb.svg"
+                      alt="Bulb icon"
+                      class="share-btn__img"
+                    />
+                  </button>
+                  <p class="share__discount__info__desc">
+                    А мы реализуем ваш
+                    <br />
+                    запрос на новый модуль!
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -806,146 +816,180 @@
       <section class="faq">
         <div class="page-container">
           <div class="faq-wrapper">
-            <div class="faq__header">
-              <h3 class="faq__header__title">
-                Отвечаем
-                <br />
-                <span class="faq__header__title__highlight">
-                  на частые вопросы
-                </span>
-              </h3>
-            </div>
-            <div class="accordion">
-              <div class="accordion__item">
-                <button class="accordion__header">
-                  Перестал работать модуль
-                  <div class="accordion__icon-wrapper">
-                    <span class="accordion__icon"></span>
-                  </div>
-                </button>
-                <div class="accordion__content">
-                  <p>
-                    Убедитесь, что у вас установлена последняя версия модуля. Мы
-                    регулярно выпускаем обновления, улучшающие функциональность
-                    и стабильность. Использование устаревшей версии может
-                    привести к ошибкам в работе.
-                  </p>
-                </div>
-              </div>
-              <div class="accordion__item">
-                <button class="accordion__header">
-                  Можно ли продлить демо-версию модуля?
-                  <div class="accordion__icon-wrapper">
-                    <span class="accordion__icon"></span>
-                  </div>
-                </button>
-                <div class="accordion__content">
-                  <p>
-                    Продление демо-версии возможно только в том случае, если вы
-                    не смогли протестировать модуль по нашей вине — например,
-                    из-за проведения технических работ. В этом случае напишите
-                    нам в тех.поддержку.
-                  </p>
-                </div>
-              </div>
-              <div class="accordion__item">
-                <button class="accordion__header">
-                  Как узнать, подойдет ли модуль для моего сайта?
-                  <div class="accordion__icon-wrapper">
-                    <span class="accordion__icon"></span>
-                  </div>
-                </button>
-                <div class="accordion__content">
-                  <p>
-                    На странице каждого модуля указаны технические параметры
-                    совместимости.
-                    <br />
-                    Также предоставляем пробный период на 7 дней, в течение
-                    которого вы можете протестировать модуль, оценить его
-                    функциональность и убедиться в его совместимости с вашим
-                    сайтом.
-                  </p>
-                </div>
-              </div>
-              <div class="accordion__item">
-                <button class="accordion__header">
-                  Помощь в установке платная?
-                  <div class="accordion__icon-wrapper">
-                    <span class="accordion__icon"></span>
-                  </div>
-                </button>
-                <div class="accordion__content">
-                  <p>
-                    Нет! Мы бесплатно предоставляем технического специалиста,
-                    который настроит виджет и разместит его на нужной странице
-                    вашего сайта. Для этого потребуется временный доступ к
-                    вашему сайту.
-                  </p>
-                </div>
-              </div>
-              <div class="accordion__item">
-                <button class="accordion__header">
-                  Можно ли вернуть деньги за модуль?
-                  <div class="accordion__icon-wrapper">
-                    <span class="accordion__icon"></span>
-                  </div>
-                </button>
-                <div class="accordion__content">
-                  <p>
-                    Мы предоставляем пробный период на 7 дней, в течение
-                    которого вы можете протестировать модуль, оценить его
-                    функциональность и убедиться в его совместимости с вашим
-                    проектом. После покупки возврат средств не предусмотрен.
-                    Однако в исключительных и обоснованных случаях возможны
-                    индивидуальные решения — свяжитесь со службой технической
-                    поддержки 1С-Битрикс.
-                  </p>
-                </div>
-              </div>
-              <div class="accordion__item">
-                <button class="accordion__header">
-                  На каких CMS и конструкторах сайтов работают наши виджеты?
-                  <div class="accordion__icon-wrapper">
-                    <span class="accordion__icon"></span>
-                  </div>
-                </button>
-                <div class="accordion__content">
-                  <p>Все модули адаптированы только под CMS 1С-Битрикс.</p>
-                </div>
-              </div>
-              <div class="accordion__item">
-                <button class="accordion__header">
-                  Не вижу расположение модуля на сайте
-                  <div class="accordion__icon-wrapper">
-                    <span class="accordion__icon"></span>
-                  </div>
-                </button>
-                <div class="accordion__content">
-                  <p>
-                    Необходимо установить компонент модуля на странице сайта.
-                    Обратитесь к инструкции.
-                  </p>
-                </div>
-              </div>
-              <div class="accordion__item">
-                <button class="accordion__header">
-                  Модуль не появился в компонентах
-                  <div class="accordion__icon-wrapper">
-                    <span class="accordion__icon"></span>
-                  </div>
-                </button>
-                <div class="accordion__content">
-                  <p>
-                    Перейдите в публичную часть сайта, выберите раздел
-                    “Компоненты” нажмите на кнопку “Поиск компонентов”. Если
-                    ничего не появилось, обратитесь в тех.поддержку.
-                  </p>
-                </div>
-              </div>
+            <h2 class="faq__title">
+              Отвечаем
+              <span class="faq__title--highlight">на частые вопросы</span>
+            </h2>
+            <div class="wa-stack">
+              <wa-details
+                name="faq-group"
+                class="faq-item"
+                summary="Перестал работать модуль"
+              >
+                <wa-icon
+                  src="src/images/plus.svg"
+                  class="faq-icon"
+                  slot="expand-icon"
+                ></wa-icon>
+                <wa-icon
+                  src="src/images/plus.svg"
+                  class="faq-icon"
+                  slot="collapse-icon"
+                ></wa-icon>
+                Убедитесь, что у вас установлена последняя версия модуля. Мы
+                регулярно выпускаем обновления, улучшающие функциональность и
+                стабильность. Использование устаревшей версии может привести к
+                ошибкам в работе.
+              </wa-details>
+
+              <wa-details
+                name="faq-group"
+                summary="Можно ли продлить демо-версию модуля?"
+                class="faq-item"
+              >
+                <wa-icon
+                  src="src/images/plus.svg"
+                  class="faq-icon"
+                  slot="expand-icon"
+                ></wa-icon>
+                <wa-icon
+                  src="src/images/plus.svg"
+                  class="faq-icon"
+                  slot="collapse-icon"
+                ></wa-icon>
+                Продление демо-версии возможно только в том случае, если вы не
+                смогли протестировать модуль по нашей вине — например, из-за
+                проведения технических работ. В этом случае напишите нам в
+                тех.поддержку.
+              </wa-details>
+
+              <wa-details
+                name="faq-group"
+                class="faq-item"
+                summary="Как узнать, подойдет ли модуль для моего сайта?"
+              >
+                <wa-icon
+                  src="src/images/plus.svg"
+                  class="faq-icon"
+                  slot="expand-icon"
+                ></wa-icon>
+                <wa-icon
+                  src="src/images/plus.svg"
+                  class="faq-icon"
+                  slot="collapse-icon"
+                ></wa-icon>
+
+                На странице каждого модуля указаны технические параметры
+                совместимости. Также предоставляем пробный период на 7 дней, в
+                течение которого вы можете протестировать модуль, оценить его
+                функциональность и убедиться в его совместимости с вашим сайтом.
+              </wa-details>
+              <wa-details
+                class="faq-item"
+                name="faq-group"
+                summary="Помощь в установке платная?"
+              >
+                <wa-icon
+                  src="src/images/plus.svg"
+                  class="faq-icon"
+                  slot="expand-icon"
+                ></wa-icon>
+                <wa-icon
+                  src="src/images/plus.svg"
+                  class="faq-icon"
+                  slot="collapse-icon"
+                ></wa-icon>
+
+                Нет! Мы бесплатно предоставляем технического специалиста,
+                который настроит виджет и разместит его на нужной странице
+                вашего сайта. Для этого потребуется временный доступ к вашему
+                сайту.
+              </wa-details>
+              <wa-details
+                name="faq-group"
+                class="faq-item"
+                summary="Можно ли вернуть деньги за модуль?"
+              >
+                <wa-icon
+                  src="src/images/plus.svg"
+                  class="faq-icon"
+                  slot="expand-icon"
+                ></wa-icon>
+                <wa-icon
+                  src="src/images/plus.svg"
+                  class="faq-icon"
+                  slot="collapse-icon"
+                ></wa-icon>
+
+                Мы предоставляем пробный период на 7 дней, в течение которого вы
+                можете протестировать модуль, оценить его функциональность и
+                убедиться в его совместимости с вашим проектом. После покупки
+                возврат средств не предусмотрен. Однако в исключительных и
+                обоснованных случаях возможны индивидуальные решения — свяжитесь
+                со службой технической поддержки 1С-Битрикс.
+              </wa-details>
+              <wa-details
+                name="faq-group"
+                class="faq-item"
+                summary="На каких CMS и конструкторах сайтов работают наши виджеты?"
+              >
+                <wa-icon
+                  src="src/images/plus.svg"
+                  class="faq-icon"
+                  slot="expand-icon"
+                ></wa-icon>
+                <wa-icon
+                  src="src/images/plus.svg"
+                  class="faq-icon"
+                  slot="collapse-icon"
+                ></wa-icon>
+
+                Все модули адаптированы только под CMS 1С-Битрикс.
+              </wa-details>
+              <wa-details
+                name="faq-group"
+                class="faq-item"
+                summary="Не вижу расположение модуля на сайте"
+              >
+                <wa-icon
+                  src="src/images/plus.svg"
+                  class="faq-icon"
+                  slot="expand-icon"
+                ></wa-icon>
+                <wa-icon
+                  src="src/images/plus.svg"
+                  class="faq-icon"
+                  slot="collapse-icon"
+                ></wa-icon>
+
+                Необходимо установить компонент модуля на странице сайта.
+                Обратитесь к инструкции.
+              </wa-details>
+              <wa-details
+                name="faq-group"
+                class="faq-item"
+                summary="Модуль не появился в компонентах"
+              >
+                <wa-icon
+                  src="src/images/plus.svg"
+                  class="faq-icon"
+                  slot="expand-icon"
+                ></wa-icon>
+                <wa-icon
+                  src="src/images/plus.svg"
+                  class="faq-icon"
+                  slot="collapse-icon"
+                ></wa-icon>
+
+                Перейдите в публичную часть сайта, выберите раздел “Компоненты”
+                нажмите на кнопку “Поиск компонентов”. Если ничего не появилось,
+                обратитесь в тех.поддержку.
+              </wa-details>
             </div>
           </div>
         </div>
       </section>
+      <section class="form"></section>
     </main>
   </body>
 </html>
